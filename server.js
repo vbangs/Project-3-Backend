@@ -1,29 +1,66 @@
-require("dotenv").config();
-const {PORT = 3000, MONGO} = process.env;
-const express = require("express");
-const app = express();
-const mongoose = require("mongoose")
+/////////////////////////
+// DEPENDENCIES
+/////////////////////////
+const express = require("express")
+const {Schema, model} = require("./connection")
+
+/////////////////////////
+// The Application Object
+/////////////////////////
+const app = express()
 
 
-// Database Connection
-mongoose.connect(MONGO, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-  });
+// SCHEMA
+const bookSchema = new Schema ({
+    id: String, 
+    comment: String
+})
 
-// Connection Events
-  mongoose.connection
-    .on("open", () => console.log("Your are connected to mongoose"))
-    .on("close", () => console.log("Your are disconnected from mongoose"))
-    .on("error", (error) => console.log(error));
+// MODELS
+const Books = model("Books", bookSchema)
 
 
-    
-// Test Route
+
+/////////////////////////
+// The Data
+/////////////////////////
+const testBooks = [
+    {id: "123", comment: "interesting"},
+    {name: "456", role: "boring"}
+]
+
+/////////////////////////
+// MIDDLEWARE
+/////////////////////////
+
+app.use(express.json())
+
+
+/////////////////////////
+// Routes
+/////////////////////////
 app.get("/", (req, res) => {
-    res.send("IT WORKS!");
-  });
+    res.json(testBooks)
+})
 
 
+// index
+app.get("/books", (req, res) => {
+    // send the turtles array as JSON
+    res.json("index")
+})
 
-app.listen(PORT, () => console.log(`listening on PORT ${PORT}`));
+// update
+app.put("/books/:id", (req, res) => {
+    res.json("update")
+})
+
+// delete
+app.delete("/books/:id", (req, res) => {
+    res.json("delete")
+})
+
+/////////////////////////
+// Listener
+/////////////////////////
+app.listen(1337, () => console.log("Listening on port 1337"))
