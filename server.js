@@ -1,27 +1,13 @@
 /////////////////////////
 // DEPENDENCIES
 /////////////////////////
-require("dotenv").config()
-const {PORT = 3000, MONGO}
 const express = require("express")
 const {Schema, model} = require("./connection")
-const mongoose = require("mongoose")
 
 /////////////////////////
 // The Application Object
 /////////////////////////
 const app = express()
-
-// Database
-mongoose.connect(MONGO, {
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-})
-
-mongoose.connection
-  .on("open", () => console.log("You are connected to mongoose"))
-  .on("close", () => console.log("You are disconnected from mongoose"))
-  .on("error", (error) => console.log(error))
 
 
 // SCHEMA
