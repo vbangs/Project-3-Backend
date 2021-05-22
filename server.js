@@ -34,6 +34,8 @@ const testBooks = [
 /////////////////////////
 
 app.use(express.json())
+app.use(cors())
+app.use(morgan("dev"))
 
 
 /////////////////////////
@@ -58,6 +60,24 @@ app.put("/books/:id", (req, res) => {
 // delete
 app.delete("/books/:id", (req, res) => {
     res.json("delete")
+})
+
+// create
+app.post("/books", async (req, res) => {
+  try {
+    res.json(await Books.create(req.body))
+  } catch (error) {
+    res.status(400).json(error)
+  }
+})
+
+// show
+app.get("/books/:id", async (req, res) => {
+  try {
+    res.json(await Books.findById(req.params.id))
+  } catch (error) {
+    res.status(400).json(error)
+  }
 })
 
 /////////////////////////

@@ -8,7 +8,7 @@ const mongoose = require("mongoose")
 const {log} = require("mercedlogger")
 
 // Bring in our database string from .env or default string
-const MONGODB_URL = process.env.MONGODB_URL || "mongodb://localhost:27017/defaultdb"
+const MONGO = process.env.MONGO || "mongodb://localhost:27017/defaultdb"
 
 ///////////////////////////////////
 // Mongoose Configuration Object to Avoid Warnings
@@ -18,7 +18,7 @@ const config = {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:
 ///////////////////////////////////
 // Making the Database Connection
 ///////////////////////////////////
-mongoose.connect(MONGODB_URL, config)
+mongoose.connect(MONGO, config)
 
 ///////////////////////////////////
 // Handling Connection Events
