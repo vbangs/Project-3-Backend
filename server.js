@@ -11,20 +11,20 @@ const app = express()
 
 
 // SCHEMA
-const bookSchema = new Schema ({
+const commentSchema = new Schema ({
     id: String, 
     comment: String
 })
 
 // MODELS
-const Books = model("Books", bookSchema)
+const Comments = model("Comments", commentSchema)
 
 
 
 /////////////////////////
 // The Data
 /////////////////////////
-const testBooks = [
+const testComments = [
     {id: "123", comment: "interesting"},
     {id: "456", comment: "boring"}
 ]
@@ -42,7 +42,7 @@ app.use(morgan("dev"))
 // Routes
 /////////////////////////
 app.get("/", (req, res) => {
-    res.json(testBooks)
+    res.json(testComments)
 })
 
 
@@ -51,7 +51,7 @@ app.get("/", (req, res) => {
 app.get("/books", async (req, res) => {
   try {
     // send all people
-    res.json(await Books.find({}));
+    res.json(await Comments.find({}));
   } catch (error) {
     //send error
     res.status(400).json(error);
@@ -63,7 +63,7 @@ app.get("/books", async (req, res) => {
 // update
 app.put("/books/:id", async (req, res) => {
     try {
-      res.json(await Books.findByIdAndUpdate(req.params.id, req.body, {new: true}))
+      res.json(await Comments.findByIdAndUpdate(req.params.id, req.body, {new: true}))
     } catch (error) {
       res.status(400).json(error)
     }
@@ -73,7 +73,7 @@ app.put("/books/:id", async (req, res) => {
 app.delete("/books/:id", async (req, res) => {
   try {
     // send all people
-    res.json(await Books.findByIdAndRemove(req.params.id));
+    res.json(await Comments.findByIdAndRemove(req.params.id));
   } catch (error) {
     //send error
     res.status(400).json(error);
@@ -84,7 +84,7 @@ app.delete("/books/:id", async (req, res) => {
 // create
 app.post("/books", async (req, res) => {
   try {
-    res.json(await Books.create(req.body))
+    res.json(await Comments.create(req.body))
   } catch (error) {
     res.status(400).json(error)
   }
@@ -95,7 +95,7 @@ app.post("/books", async (req, res) => {
 // show
 app.get("/books/:id", async (req, res) => {
   try {
-    res.json(await Books.findById(req.params.id))
+    res.json(await Comments.findById(req.params.id))
   } catch (error) {
     res.status(400).json(error)
   }
