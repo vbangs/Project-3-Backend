@@ -50,6 +50,12 @@ app.get("/books", (req, res) => {
     res.json("index")
 })
 
+// create
+app.post("/books", (req, res) => {
+    res.json("create")
+})
+
+
 // update
 app.put("/books/:id", (req, res) => {
     res.json("update")
@@ -58,6 +64,11 @@ app.put("/books/:id", (req, res) => {
 // delete
 app.delete("/books/:id", (req, res) => {
     res.json("delete")
+})
+
+// show
+app.get("/books/:id", (req, res) => {
+    res.json("show")
 })
 
 /////////////////////////
