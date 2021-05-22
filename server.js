@@ -1,13 +1,27 @@
 /////////////////////////
 // DEPENDENCIES
 /////////////////////////
+require("dotenv").config()
+const {PORT = 3000, MONGO}
 const express = require("express")
 const {Schema, model} = require("./connection")
+const mongoose = require("mongoose")
 
 /////////////////////////
 // The Application Object
 /////////////////////////
 const app = express()
+
+// Database
+mongoose.connect(MONGO, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+})
+
+mongoose.connection
+  .on("open", () => console.log("You are connected to mongoose"))
+  .on("close", () => console.log("You are disconnected from mongoose"))
+  .on("error", (error) => console.log(error))
 
 
 // SCHEMA
@@ -34,6 +48,8 @@ const testBooks = [
 /////////////////////////
 
 app.use(express.json())
+app.use(cors())
+app.use(morgan("dev"))
 
 
 /////////////////////////
@@ -59,6 +75,26 @@ app.put("/books/:id", (req, res) => {
 app.delete("/books/:id", (req, res) => {
     res.json("delete")
 })
+
+// create
+app.post("/books", async (req, res) => {
+  try {
+    res.json(await Books.create(req.body))
+  } catch (error) {
+    res.status(400).json(error)
+  }
+})
+
+// show
+app.get("/books/:id", async (req, res) => {
+  try {
+    res.json(await Books.findById(req.params.id))
+  } catch (error) {
+    res.status(400).json(error)
+  }
+})
+
+
 
 /////////////////////////
 // Listener
