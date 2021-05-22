@@ -53,8 +53,12 @@ app.get("/books", (req, res) => {
 })
 
 // update
-app.put("/books/:id", (req, res) => {
-    res.json("update")
+app.put("/books/:id", async (req, res) => {
+    try {
+      res.json(await Books.findByIdAndUpdate(req.params.id, req.body, {new: true}))
+    } catch (error) {
+      res.status(400).json(error)
+    }
 })
 
 // delete
