@@ -26,7 +26,7 @@ const Books = model("Books", bookSchema)
 /////////////////////////
 const testBooks = [
     {id: "123", comment: "interesting"},
-    {name: "456", role: "boring"}
+    {id: "456", comment: "boring"}
 ]
 
 /////////////////////////
@@ -46,11 +46,19 @@ app.get("/", (req, res) => {
 })
 
 
+
 // index
-app.get("/books", (req, res) => {
-    // send the turtles array as JSON
-    res.json("index")
+app.get("/books", async (req, res) => {
+  try {
+    // send all people
+    res.json(await Books.find({}));
+  } catch (error) {
+    //send error
+    res.status(400).json(error);
+  }
 })
+
+
 
 // update
 app.put("/books/:id", (req, res) => {
@@ -58,9 +66,16 @@ app.put("/books/:id", (req, res) => {
 })
 
 // delete
-app.delete("/books/:id", (req, res) => {
-    res.json("delete")
+app.delete("/books/:id", async (req, res) => {
+  try {
+    // send all people
+    res.json(await Books.findByIdAndRemove(req.params.id));
+  } catch (error) {
+    //send error
+    res.status(400).json(error);
+  }
 })
+
 
 // create
 app.post("/books", async (req, res) => {
@@ -70,6 +85,8 @@ app.post("/books", async (req, res) => {
     res.status(400).json(error)
   }
 })
+
+
 
 // show
 app.get("/books/:id", async (req, res) => {
