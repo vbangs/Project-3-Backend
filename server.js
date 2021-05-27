@@ -3,6 +3,8 @@
 /////////////////////////
 const express = require("express")
 const {Schema, model} = require("./connection")
+const cors = require("cors")
+const morgan = require("morgan")
 
 /////////////////////////
 // The Application Object
@@ -13,7 +15,7 @@ const app = express()
 // SCHEMA
 const commentSchema = new Schema ({
     id: String, 
-    comment: String
+    comment: [String]
 })
 
 // MODELS
