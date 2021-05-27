@@ -106,4 +106,4 @@ app.get("/books/:id", async (req, res) => {
 /////////////////////////
 // Listener
 /////////////////////////
-app.listen(1337, () => console.log("Listening on port 1337"))
+app.listen(process.env.PORT, () => console.log("Listening on port 3000"))
