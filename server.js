@@ -29,7 +29,7 @@ const Comments = model("Comments", commentSchema)
 const testComments = [
     {id: "123", comment: "interesting"},
     {id: "456", comment: "boring"},
-    {id: "60b04229679ffabf5930b73d", comment: ["Hello!"]}
+    {id: "Z_2tDwAAQBAJ", comment: ["Hello!"]}
 ]
 
 /////////////////////////
