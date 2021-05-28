@@ -30,6 +30,7 @@ const testComments = [
     {id: "123", comment: "interesting"},
     {id: "456", comment: "boring"},
     {id: "Z_2tDwAAQBAJ", comment: "Hello!"}
+    {id: "Z_2tDwAAQBAJ", comment: "Not Hello!"}
 ]
 
 /////////////////////////
