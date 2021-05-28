@@ -44,7 +44,7 @@ app.use(morgan("dev"))
 /////////////////////////
 // Routes
 /////////////////////////
-app.get("/", (req, res) => {
+app.get("/books", (req, res) => {
     res.json(testComments)
 })
 
