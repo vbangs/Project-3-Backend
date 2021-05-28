@@ -15,7 +15,7 @@ const app = express()
 // SCHEMA
 const commentSchema = new Schema ({
     id: String, 
-    comment: [String]
+    comment: String
 })
 
 // MODELS
@@ -29,7 +29,7 @@ const Comments = model("Comments", commentSchema)
 const testComments = [
     {id: "123", comment: "interesting"},
     {id: "456", comment: "boring"},
-    {id: "Z_2tDwAAQBAJ", comment: ["Hello!"]}
+    {id: "Z_2tDwAAQBAJ", comment: "Hello!"}
 ]
 
 /////////////////////////
