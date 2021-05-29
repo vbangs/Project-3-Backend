@@ -15,7 +15,7 @@ const app = express()
 // SCHEMA
 const commentSchema = new Schema ({
     id: String, 
-    comment: [String]
+    comment: String
 })
 
 // MODELS
@@ -44,9 +44,9 @@ app.use(morgan("dev"))
 /////////////////////////
 // Routes
 /////////////////////////
-app.get("/books", (req, res) => {
-    res.json(testComments)
-})
+// app.get("/books", (req, res) => {
+//     res.json(testComments)
+// })
 
 
 
