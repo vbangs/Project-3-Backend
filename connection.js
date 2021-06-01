@@ -4,9 +4,6 @@ require("dotenv").config()
 /// IMPORT MONGOOSE
 const mongoose = require("mongoose")
 
-// IMPORT MERCED LOGGER FOR COLORFUL LOGS
-const {log} = require("mercedlogger")
-
 // Bring in our database string from .env or default string
 const MONGO = process.env.MONGO || "mongodb://localhost:27017/defaultdb"
 
@@ -25,11 +22,11 @@ mongoose.connect(MONGO, config)
 ///////////////////////////////////
 mongoose.connection
 // Event for When Connection Opens
-.on("open", () => log.green("STATUS", "Connected to Mongo"))
+.on("open", () => console.log("STATUS", "Connected to Mongo"))
 // Event for When Connection Closes
-.on("close", () => log.red("STATUS", "Disconnected from Mongo"))
+.on("close", () => console.log("STATUS", "Disconnected from Mongo"))
 // Event for Connection Errors
-.on("error", (error) => log.red("ERROR", error))
+.on("error", (error) => console.log("ERROR", error))
 
 ///////////////////////////////////
 // Exporting Our Connection

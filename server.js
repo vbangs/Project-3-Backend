@@ -3,6 +3,8 @@
 /////////////////////////
 const express = require("express")
 const {Schema, model} = require("./connection")
+const cors = require("cors")
+const morgan = require("morgan")
 
 /////////////////////////
 // The Application Object
@@ -26,7 +28,8 @@ const Comments = model("Comments", commentSchema)
 /////////////////////////
 const testComments = [
     {id: "123", comment: "interesting"},
-    {id: "456", comment: "boring"}
+    {id: "456", comment: "boring"},
+    {id: "Z_2tDwAAQBAJ", comment: ["Hello!", "Not Hello!"]}
 ]
 
 /////////////////////////
@@ -41,9 +44,9 @@ app.use(morgan("dev"))
 /////////////////////////
 // Routes
 /////////////////////////
-app.get("/", (req, res) => {
-    res.json(testComments)
-})
+// app.get("/books", (req, res) => {
+//     res.json(testComments)
+// })
 
 
 
@@ -104,4 +107,4 @@ app.get("/books/:id", async (req, res) => {
 /////////////////////////
 // Listener
 /////////////////////////
-app.listen(1337, () => console.log("Listening on port 1337"))
+app.listen(process.env.PORT, () => console.log("Listening on port 3000"))
